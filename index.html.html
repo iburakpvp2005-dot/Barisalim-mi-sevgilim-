@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barışalım mı?</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        max-width: 90vw;
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 12px 20px;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.2s;
+        touch-action: manipulation;
+    }
+
+    #evet {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 28px;
+        z-index: 5;
+    }
+
+    #hayir {
+        background-color: #f44336;
+        color: white;
+        position: absolute;
+        z-index: 4;
+    }
+
+    #lutfen {
+        margin-top: 10px;
+        font-size: 22px;
+        color: #e91e63;
+        font-weight: bold;
+        height: 30px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container" id="container">
+    <h1>Barışalım mı? 💔➡️❤️</h1>
+
+    <button id="evet" onclick="evetTiklandi()">Evet</button>
+    <button id="hayir">Hayır</button>
+
+    <div id="lutfen"></div>
+</div>
+
+<script>
+    const hayir = document.getElementById("hayir");
+    const evet = document.getElementById("evet");
+    const lutfen = document.getElementById("lutfen");
+
+    let evetFontSize = 28;
+
+    // Hayır kaçsın
+    function kacir() {
+        const x = Math.random() * (window.innerWidth - hayir.offsetWidth);
+        const y = Math.random() * (window.innerHeight - hayir.offsetHeight);
+        hayir.style.left = x + "px";
+        hayir.style.top = y + "px";
+    }
+
+    hayir.addEventListener("mouseenter", kacir);
+    hayir.addEventListener("touchstart", kacir);
+
+    hayir.addEventListener("click", () => {
+        // Evet büyüsün
+        evetFontSize += 25;
+        evet.style.fontSize = evetFontSize + "px";
+
+        // Lütfen yazısı
+        lutfen.innerText = "Lütfen";
+
+        // Evet ekranı kaplasın
+        if (evetFontSize > Math.max(window.innerWidth, window.innerHeight) / 2) {
+            evet.style.position = "fixed";
+            evet.style.top = "50%";
+            evet.style.left = "50%";
+            evet.style.transform = "translate(-50%, -50%)";
+        }
+
+        kacir();
+    });
+
+    function evetTiklandi() {
+        document.body.innerHTML = `
+            <div style="
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                height:100vh;
+                text-align:center;
+                font-size:50px;
+                padding:20px;
+                color:#e91e63;
+                font-weight:bold;
+            ">
+                Güzelim benim 💖😍
+            </div>
+        `;
+    }
+
+    // İlk konum
+    kacir();
+</script>
+
+</body>
+</html>
